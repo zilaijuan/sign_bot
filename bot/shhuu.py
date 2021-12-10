@@ -3,12 +3,11 @@
 使用github actions 定时执行
 @author : stark
 """
-import requests
-import os
+
 from sys import argv
 import re
 
-import config
+
 from utils.serverchan_push import push_to_wechat
 
 import logging

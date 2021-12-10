@@ -3,8 +3,7 @@
 使用github actions 定时执行
 @author : stark
 """
-import sys
-import requests
+
 import logging
 
 from bot.base_bot import Base_Bot
