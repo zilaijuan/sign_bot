@@ -31,13 +31,13 @@ class SHHUU_Bot(Base_Bot):
         mn = re.search(pattern, data)
         res = {'error_code':0}
         if mn:
-            logging.info('签到成功,获得购机币 '+ mn.group(1) )
+            self.log.info('签到成功,获得购机币 '+ mn.group(1) )
         else:
             pattern = re.compile('您今日已经签到，请明天再来！')
             mn = re.search(pattern, data)
             if mn:
-                logging.info('今日已签到！')
+                self.log.info('今日已签到！')
                 return res
-            logging.error(data)
+            self.log.error(data)
             res = {'error_code':-1,'error_msg':'手机淘签到失败'}
         return res

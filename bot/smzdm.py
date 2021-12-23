@@ -20,7 +20,7 @@ class SMZDM_Bot(Base_Bot):
             result = msg.json()
             return True
         except Exception as e:
-            logging.error(f'Error : {e}')            
+            self.log.error(f'Error : {e}')            
             return False
  
     def checkin(self):

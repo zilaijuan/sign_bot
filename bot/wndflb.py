@@ -28,9 +28,9 @@ class FLB_Bot(Base_Bot):
         mn = re.search(pattern, data)
         res = {'error_code':0}
         if mn:
-            logging.info('签到成功,您今日第'+ mn.group(1)+'个签到,累计签到'+ mn.group(2)+'天!' )
+            self.log.info('签到成功,您今日第'+ mn.group(1)+'个签到,累计签到'+ mn.group(2)+'天!' )
         else:
-            logging.error(data)
+            self.log.error(data)
             res = {'error_code':-1,'error_msg':'福利吧签到失败'}
         return res
 

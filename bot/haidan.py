@@ -34,10 +34,10 @@ class HaiDan_Bot(Base_Bot):
     
     def get_status(self) :
 
-        logging.info('-> 正在获取用户状态...')
+        self.log.info('-> 正在获取用户状态...')
         r = self.session.get('https://www.haidan.video/index.php')
         if (r.status_code != 200) :
-            logging.error('!! 错误的状态： ' + str(r.status_code))
+            self.log.error('!! 错误的状态： ' + str(r.status_code))
 
         data = r.content.decode('utf-8')
         # 打卡状态
@@ -46,7 +46,7 @@ class HaiDan_Bot(Base_Bot):
         if not signed:
             return {'error_code':-1,'error_msg':'海胆签到失败'}
         else:
-            logging.info('-> 今日已签到')
+            self.log.info('-> 今日已签到')
             return {'error_code':0}
 
 
