@@ -12,6 +12,7 @@ from utils.serverchan_push import push_to_wechat
 
 import logging
 from bot.base_bot import Base_Bot
+import config
 
 class SHHUU_Bot(Base_Bot):
     """
@@ -20,10 +21,29 @@ class SHHUU_Bot(Base_Bot):
 
     def checkin(self):
         """
+        登陆
+        """
+        msg = self.session.get("http://www.shhuu.com")
+        content = msg.content.decode('gbk',errors='ignore')
+        
+        """
+        获取formhash
+        """
+        pattern = re.compile('formhash=(.*)\"')
+        mn = re.search(pattern, content)
+        formhash = ''
+        if mn:
+            formhash =  mn.group(1)
+        else:
+            self.log.error('formhash查找不到')
+            res = {'error_code':-1,'error_msg':'formhash查找不到'}
+            return res
+
+        """
         签到函数
         """
         url = "http://www.shhuu.com/plugin.php?id=dsu_paulsign:sign&operation=qiandao&infloat=1&inajax=1"
-        payload='formhash=58ec4a84&qdxq=kx&qdmode=2&todaysay=&fastreply=0'
+        payload='formhash=%s&qdxq=kx&qdmode=2&todaysay=&fastreply=0' %(formhash)
         msg = self.session.post(url=url, data=payload)
         data = msg.content.decode('gbk')
         #  校验结果是否正确
