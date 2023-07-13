@@ -20,13 +20,7 @@ class FLB_Bot(Base_Bot):
         """
         登陆
         """
-        url = "https://www.wnflb99.com/member.php?mod=logging&action=login&loginsubmit=yes&infloat=yes&lssubmit=yes&inajax=1"
-        payload="username=%s&password=%s&quickforward=yes&handlekey=ls" % (config.FLB_USERNAME,config.FLB_PASSWORD)
-        msg = self.session.post(url,  data=payload)
-        self.session.cookies = msg.cookies
-        
-        cookie = requests.utils.dict_from_cookiejar(msg.cookies)
-        msg = self.session.get("https://www.wnflb99.com",cookies=cookie)
+        msg = self.session.get("https://www.wnflb2023.com")
         content = msg.content.decode('utf-8',errors='ignore')
         """
         获取formhash
@@ -44,8 +38,8 @@ class FLB_Bot(Base_Bot):
         """
         签到函数
         """
-        url = 'https://www.wnflb99.com/plugin.php?id=fx_checkin:checkin&formhash=%s&infloat=yes&handlekey=fx_checkin&inajax=1&ajaxtarget=fwin_content_fx_checkin' % (formhash)
-        msg = self.session.get(url,cookies=cookie)
+        url = 'https://www.wnflb2023.com/plugin.php?id=fx_checkin:checkin&formhash=%s&infloat=yes&handlekey=fx_checkin&inajax=1&ajaxtarget=fwin_content_fx_checkin' % (formhash)
+        msg = self.session.get(url)
         data = msg.content.decode('utf-8')
         #  校验结果是否正确
         pattern = re.compile('errorhandle_fx_checkin\(\'签到成功,您今日第(\d+)个签到,累计签到(\d+)天!')

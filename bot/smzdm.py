@@ -28,28 +28,11 @@ class SMZDM_Bot(Base_Bot):
         签到函数
         """
         url = 'https://zhiyou.smzdm.com/user/checkin/jsonp_checkin'
+        url = 'https://zhiyou.smzdm.com/user/'
         msg = self.session.get(url)
+        print(msg.text)
         if self.__json_check(msg):
             return msg.json()
         return msg.content
 
-'''
-def start(SERVERCHAN_SECRETKEY):
-    logging.info("=================================================")
-    logging.info("||                 smzdm Sign                  ||")
-    logging.info("=================================================")
-    sb = SMZDM_Bot()
-    sb.load_cookie_str(config.SMZDM_COOKIE)
-    # cookies = os.environ["COOKIES"]
-    # sb.load_cookie_str(cookies)
-    res = sb.checkin()
-    
-    # print('sc_key: ', SERVERCHAN_SECRETKEY)
-    if isinstance(SERVERCHAN_SECRETKEY,str) and len(SERVERCHAN_SECRETKEY)>0:
-        if res['error_code'] != 0:
-            logging.info('检测到 SCKEY， 准备推送')
-            push_to_wechat(text = '什么值得买每日签到',
-                            desp = str(res),
-                            secretKey = SERVERCHAN_SECRETKEY)
-    logging.info('代码完毕')
-'''
+
