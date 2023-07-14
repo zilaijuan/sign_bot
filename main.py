@@ -9,11 +9,15 @@ from bot.manhua import MANHUA_Bot
 from bot.moeshare import MOESHARE_Bot
 from bot.southplus import SOUTHPLUS_Bot
 from bot.threedm import THREEDM_Bot
-import config
 import log.LogConfig
 import ast
 import os
 
+try:
+    import config
+except ModuleNotFoundError:
+    # Error handling
+    pass
 
 
 
